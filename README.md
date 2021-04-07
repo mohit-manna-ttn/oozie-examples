@@ -1,9 +1,9 @@
-#Shell
+# Shell
 ```
 jobTracker: sandbox-hdp.hortonworks.com:8050
 nameNode: hdfs://sandbox-hdp.hortonworks.com:8020
 ```
-#MapReduce
+# MapReduce
 ```
 oozie job -config examples/apps/map-reduce/job.properties -submit 
 oozie job  -start 0000000-210406181056876-oozie-oozi-W 
@@ -11,7 +11,7 @@ oozie job  -log 0000000-210406181056876-oozie-oozi-W
 oozie job  -info 0000000-210406181056876-oozie-oozi-W
 ```
 
-#PIG
+# PIG
 Task: 
 
 ```
@@ -88,7 +88,7 @@ check http://localhost:50070/explorer.html#/user/maria_dev/examples/output-data/
 Explanation: 
 ':' is not present in the input data. So it will be copied as it is.
 
-#Hive
+# Hive
 Go to [hive](https://github.com/mohit-manna/oozie-examples/tree/main/examples/apps/hive2)
 **Don't** read README file. No need to change workflow.xml file
 Use workflow.xml
@@ -106,7 +106,7 @@ oozie.use.system.libpath=true
 oozie.wf.application.path=${nameNode}/user/${user.name}/${examplesRoot}/apps/hive2  
 ```
 
-#Sqoop
+# Sqoop
 Script files:
 1. [db.hsqldb.properties](https://github.com/mohit-manna/oozie-examples/blob/main/examples/apps/sqoop/db.hsqldb.properties)
 2. [db.hsqldb.script](https://github.com/mohit-manna/oozie-examples/blob/main/examples/apps/sqoop/db.hsqldb.script)
