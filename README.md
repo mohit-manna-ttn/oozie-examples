@@ -1,17 +1,24 @@
-# Shell
-```
-jobTracker: sandbox-hdp.hortonworks.com:8050
-nameNode: hdfs://sandbox-hdp.hortonworks.com:8020
-```
-# MapReduce
-```
-oozie job -config examples/apps/map-reduce/job.properties -submit 
-oozie job  -start 0000000-210406181056876-oozie-oozi-W 
-oozie job  -log 0000000-210406181056876-oozie-oozi-W   
-oozie job  -info 0000000-210406181056876-oozie-oozi-W
-```
 
-# PIG
+# Setup
+We have used Hortonworks Sandbox Platform to execute the examples.
+Oozie Web UI is disabled by default. We need to enable it manually. 
+Steps to Enable the Oozie Web UI.
+1. Download [ext-2.2.zip](http://archive.cloudera.com/gplextras/misc/ext-2.2.zip)
+2. sudo cp ext-2.2.zip /usr/hdp/current/oozie-client/libext/
+2. sudo cp ext-2.2.zip /usr/hdp/current/oozie-server/libext/
+3. sudo chown oozie:hadoop /usr/hdp/current/oozie-client/libext/ext-2.2.zip
+3. sudo chown oozie:hadoop /usr/hdp/current/oozie-server/libext/ext-2.2.zip
+4. sudo -u oozie /usr/hdp/current/oozie-server/bin/oozie-setup.sh prepare-war
+5. Restart Oozie Service from Ambari UI
+
+Step 4 may not work for you. Most of the time restarting oozie service does the work. 
+For more info see [Link1](https://stackoverflow.com/questions/49276756/ext-js-library-not-installed-correctly-in-oozie) [Link2](http://bdlabs.edureka.co/static/help/topics/admin_oozie_console.html&sa=D&source=hangouts&ust=1618460678489000&usg=AFQjCNHKq-HRyr8PpeHJuf7GzLPm-uEiKQ)
+
+Always remember that two files are used to execute any Oozie Workflow.
+1. workflow.xml (This file must be there in HDFS before Execution. Its URI is there in job.properties file. Use hdfs dfs -put)
+2. job.properties (It should be there in local fs.Modify this according to the ports.)
+
+# PIG Example
 Task: 
 
 ```
@@ -88,7 +95,19 @@ check http://localhost:50070/explorer.html#/user/maria_dev/examples/output-data/
 Explanation: 
 ':' is not present in the input data. So it will be copied as it is.
 
-# Hive
+# Shell Example
+```
+jobTracker: sandbox-hdp.hortonworks.com:8050
+nameNode: hdfs://sandbox-hdp.hortonworks.com:8020
+```
+# MapReduce Example
+```
+oozie job -config examples/apps/map-reduce/job.properties -submit 
+oozie job  -start 0000000-210406181056876-oozie-oozi-W 
+oozie job  -log 0000000-210406181056876-oozie-oozi-W   
+oozie job  -info 0000000-210406181056876-oozie-oozi-W
+```
+# Hive Example
 Go to [hive](https://github.com/mohit-manna/oozie-examples/tree/main/examples/apps/hive2)
 **Don't** read README file. No need to change workflow.xml file
 Use workflow.xml
@@ -106,7 +125,7 @@ oozie.use.system.libpath=true
 oozie.wf.application.path=${nameNode}/user/${user.name}/${examplesRoot}/apps/hive2  
 ```
 
-# Sqoop
+# Sqoop Example
 Script files:
 1. [db.hsqldb.properties](https://github.com/mohit-manna/oozie-examples/blob/main/examples/apps/sqoop/db.hsqldb.properties)
 2. [db.hsqldb.script](https://github.com/mohit-manna/oozie-examples/blob/main/examples/apps/sqoop/db.hsqldb.script)
@@ -121,3 +140,4 @@ examplesRoot=examples
 oozie.use.system.libpath=true
 oozie.wf.application.path=${nameNode}/user/${user.name}/${examplesRoot}/apps/sqoop
 ```
+
